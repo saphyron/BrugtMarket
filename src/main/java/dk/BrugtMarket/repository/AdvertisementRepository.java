@@ -55,4 +55,22 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
             return null;
         }
     }
+
+    public List<Advertisement> getByGId(Id id) {
+        try {
+            return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_BY_CATEGORY, AdvertisementPO.class)
+                        .setParameter(AdvertisementPO.GID_PARAMETER, id)
+                        .getResultList());
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public List<Advertisement> getAllCategories() {
+        try {
+            return mapper.mapAdvertisement(entityManager.createNamedQuery(AdvertisementPO.FIND_ALL_CATEGORIES, AdvertisementPO.class).getResultList());
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
 }

@@ -17,7 +17,9 @@ import java.util.UUID;
 @Table(name = "ADVERTISEMENT")
 @NamedQueries({
         @NamedQuery(name = "AdvertisementPO.findAll", query = "Select q from AdvertisementPO q"),
-        @NamedQuery(name = "AdvertisementPO.findByQID", query = "Select q from AdvertisementPO q where q.id=:QID")
+        @NamedQuery(name = "AdvertisementPO.findByQID", query = "Select q from AdvertisementPO q where q.id=:QID"),
+        @NamedQuery(name = "AdvertisementPO.findCategories", query = "Select q.CATEGORY from AdvertisementPO q where q.category=:GID"),
+        @NamedQuery(name = "AdvertisementPO.findAllCategories", query = "Select q.CATEGORY from AdvertisementPO q")
 })
 
 public class AdvertisementPO {
@@ -25,6 +27,9 @@ public class AdvertisementPO {
     public static final String FIND_ALL = "AdvertisementPO.findAll";
     public static final String QID_PARAMETER = "QID";
     public static final String FIND_BY_QID = "AdvertisementPO.findByQID";
+    public static final String GID_PARAMETER = "GID";
+    public static final String FIND_BY_CATEGORY = "AdvertisementPO.findCategories";
+    public static final String FIND_ALL_CATEGORIES = "AdvertisementPO.findAllCategories";
 
     @Id
     @GeneratedValue
