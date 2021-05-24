@@ -8,13 +8,12 @@ public class Advertisement {
     private final Headline headline;
     private final Text text;
     private final Price price;
-    private final Ad_User user;
     private final Creation_Date creation;
 
     public Advertisement(
             Id id, Category category, Sales_Type type,
             Headline headline, Text text, Price price,
-            Ad_User user, Creation_Date creation
+            Creation_Date creation
             ) {
         this.id = id;
         this.category = category;
@@ -22,7 +21,6 @@ public class Advertisement {
         this.headline = headline;
         this.text = text;
         this.price = price;
-        this.user = user;
         this.creation = creation;
     }
 
@@ -50,9 +48,6 @@ public class Advertisement {
         return price;
     }
 
-    public Ad_User getUser() {
-        return user;
-    }
 
     public Creation_Date getCreation() {
         return creation;
@@ -67,7 +62,6 @@ public class Advertisement {
                 ", headline=" + headline +
                 ", text=" + text +
                 ", price=" + price +
-                ", user=" + user +
                 ", creation=" + creation +
                 '}';
     }

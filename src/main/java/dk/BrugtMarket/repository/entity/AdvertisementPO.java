@@ -137,16 +137,5 @@ public class AdvertisementPO {
         this.userPO = userPO;
     }
 
-    @Override
-    public String toString() {
-        return "AdvertisementPO{" +
-                "id=" + id +
-                ", category=" + category +
-                ", salesType=" + salesType +
-                ", headline='" + headline + '\'' +
-                ", text='" + text + '\'' +
-                ", price=" + price +
-                ", creationDate=" + creationDate +
-                '}';
-    }
+
 }

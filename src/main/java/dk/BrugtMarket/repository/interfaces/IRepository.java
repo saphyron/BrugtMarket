@@ -1,10 +1,12 @@
 package dk.BrugtMarket.repository.interfaces;
 
+import dk.BrugtMarket.domain.Id;
+
 import java.util.List;
 
 public interface IRepository<T> {
-    public void remove(String id);
+    public void remove(Id id);
     public List<T> getAll();
     public void insert(T entity);
-    public T getById(String id);
+    public T getById(Id id);
 }
