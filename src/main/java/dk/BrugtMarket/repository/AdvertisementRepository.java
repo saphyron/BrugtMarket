@@ -1,7 +1,9 @@
 package dk.BrugtMarket.repository;
 
 import dk.BrugtMarket.domain.Ad_User;
+import dk.BrugtMarket.domain.Advertisement;
 import dk.BrugtMarket.domain.Id;
+import dk.BrugtMarket.repository.entity.AdvertisementPO;
 import dk.BrugtMarket.repository.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
@@ -10,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
 
-public class AdvertisementRepository implements IRepository<Ad_User> {
+public class AdvertisementRepository implements IRepository<Advertisement> {
 
     private final EntityManager entityManager;
     private final Mapper mapper;
@@ -23,21 +25,34 @@ public class AdvertisementRepository implements IRepository<Ad_User> {
 
     @Override
     public void remove(Id id) {
-
+        AdvertisementPO advertisementToRemove = entityManager.find(AdvertisementPO.class, id);
+        entityManager.remove(advertisementToRemove);
     }
 
     @Override
-    public List<Ad_User> getAll() {
-        return null;
+    public List<Advertisement> getAll() {
+        return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_ALL, AdvertisementPO.class).getResultList());
     }
 
     @Override
-    public void insert(Ad_User entity) {
-
+    public void insert(Advertisement entity) {
+        AdvertisementPO newAdvertisement = mapper.mapAdvertisementPO(entity);
+        this.entityManager.persist(newAdvertisement);
     }
 
     @Override
-    public Ad_User getById(Id id) {
-        return null;
+    public Advertisement getById(Id id) {
+        Advertisement foundAdvertisement = mapper.mapAdvertisement(entityManager.find(AdvertisementPO.class, id));
+        return foundAdvertisement;
+    }
+
+    public List<Advertisement> getByQId(Id id) {
+        try {
+            return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_BY_QID, AdvertisementPO.class)
+                        .setParameter(AdvertisementPO.QID_PARAMETER, id)
+                        .getResultList());
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

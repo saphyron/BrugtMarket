@@ -34,9 +34,21 @@ public class AdUserRepository implements IRepository<Ad_User> {
     }
 
     @Override
-    public void insert(Ad_User entity) {
-        Ad_UserPO newUser = mapper.mapUserPO(entity);
-        this.entityManager.persist(newUser);
+    public void insert(Ad_User user) {
+        Ad_UserPO newUser = new Ad_UserPO(
+                user.getFirst().getName(),
+                user.getLast().getName(),
+                user.getCompany().getName(),
+                user.getPhone().getNumber(),
+                user.getPhc().getCode(),
+                user.getEmail().getEmail(),
+                user.getCreation().getDate(),
+                mapper.mapCityPO(user.getCity()),
+                user.getType().getType()
+        );
+        user.getAdvertisements().forEach(a-> newUser.addAdvertisement(mapper.mapAdvertisementPO(a)));
+        entityManager.persist(newUser);
+        newUser.getAdvertisements().forEach(entityManager::persist);
     }
 
     @Override

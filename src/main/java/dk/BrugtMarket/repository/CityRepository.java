@@ -1,7 +1,9 @@
 package dk.BrugtMarket.repository;
 
 import dk.BrugtMarket.domain.Ad_User;
+import dk.BrugtMarket.domain.City;
 import dk.BrugtMarket.domain.Id;
+import dk.BrugtMarket.repository.entity.CityPO;
 import dk.BrugtMarket.repository.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
@@ -10,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
 
-public class CityRepository implements IRepository<Ad_User> {
+public class CityRepository implements IRepository<City> {
 
     private final EntityManager entityManager;
     private final Mapper mapper;
@@ -23,21 +25,24 @@ public class CityRepository implements IRepository<Ad_User> {
 
     @Override
     public void remove(Id id) {
-
+        CityPO cityToRemove = entityManager.find(CityPO.class, id);
+        entityManager.remove(cityToRemove);
     }
 
     @Override
-    public List<Ad_User> getAll() {
-        return null;
+    public List<City> getAll() {
+        return mapper.mapCities(entityManager.createNamedQuery(CityPO.FIND_ALL, CityPO.class).getResultList());
     }
 
     @Override
-    public void insert(Ad_User entity) {
-
+    public void insert(City entity) {
+        CityPO newCity = mapper.mapCityPO(entity);
+        this.entityManager.persist(newCity);
     }
 
     @Override
-    public Ad_User getById(Id id) {
-        return null;
+    public City getById(Id id) {
+        City foundCity = mapper.mapCity(entityManager.find(CityPO.class, id));
+        return foundCity;
     }
 }
