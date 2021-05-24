@@ -1,20 +1,30 @@
-insert into dbo.question values
-(newid(),'SCIENCE','Wich physical property can be measured in the unit Coulomb','Physics',12),
-(newid(),'SCIENCE','Which design pattern is mostly used???','Computer Science',14)
+CREATE TABLE CITY (
+ZIP_CODE char(4) PRIMARY KEY,
+CITY VARCHAR(40) NOT NULL
+)
 
-insert into dbo.answer values
-(newid(),'Pressure', 'The SI unit for Pressure is Pascal', 0, 'https://en.wikipedia.org/wiki/Pressure', (select ID from dbo.Question where field = 'Physics')),
-(newid(),'Temperature', 'The SI unit for Temperature is Kelvin', 0, 'https://en.wikipedia.org/wiki/Temperature', (select ID from dbo.Question where field = 'Physics')),
-(newid(),'Volume', 'The SI unit for Volume is Cubic Meter', 0, 'https://en.wikipedia.org/wiki/Volume', (select ID from dbo.Question where field = 'Physics')),
-(newid(),'Force', 'The SI unit for Force is Newton', 0, 'https://en.wikipedia.org/wiki/Force', (select ID from dbo.Question where field = 'Physics')),
-(newid(),'Charge', 'The SI unit for Electric Charge is Coulomb', 1, 'https://en.wikipedia.org/wiki/Pascal_(unit)', (select ID from dbo.Question where field = 'Physics')),
-(newid(),'Singleton', 'singleton creates a instance of an object, witch can only be created once', 1, 'https://en.wikipedia.org/wiki/Singleton_pattern', (select ID from dbo.Question where field = 'Computer Science')),
-(newid(),'Adapter', 'The SI unit for Temperature is Kelvin', 0, 'https://en.wikipedia.org/wiki/Temperature', (select ID from dbo.Question where field = 'Computer Science')),
-(newid(),'Observer', 'The SI unit for Volume is Cubic Meter', 0, 'https://en.wikipedia.org/wiki/Volume', (select ID from dbo.Question where field = 'Computer Science')),
-(newid(),'Iterator', 'The SI unit for Force is Newton', 0, 'https://en.wikipedia.org/wiki/Force', (select ID from dbo.Question where field = 'Computer Science')),
-(newid(),'Composite', 'The SI unit for Electric Charge is Coulomb', 1, 'https://en.wikipedia.org/wiki/Pascal_(unit)', (select ID from dbo.Question where field = 'Computer Science'))
+CREATE TABLE AD_USER (
+ID varchar(40) PRIMARY KEY,
+FIRST_NAME varchar(30) NOT NULL,
+LAST_NAME varchar(30) NOT NULL,
+ COMPANY_NAME varchar(40),
+PHONE_NUMBER varchar(20) NOT NULL,
+PHONE_CODE varchar(10) NOT NULL,
+EMAIL varchar(100) NOT NULL UNIQUE,
+CREATION_DATE date NOT NULL,
+CITY_FK char(4) NOT NULL,
+TYPE Varchar(10) NOT NULL,
+CONSTRAINT CITY_FK foreign key(CITY_FK) references CITY(ZIP_CODE)
+)
 
-
-select * from dbo.Answer
-select * from dbo.Question
-select ID from dbo.Question where field = 'Physics'
+CREATE TABLE ADVERTISEMENT (
+ID varchar(40) PRIMARY KEY,
+CATEGORY varchar(40) NOT NULL, //Denne modelerer bil/mc/legetøj/etc
+TYPE varchar(40) NOT NULL,// denne modelerer salg/køb/lease etc
+HEADLINE varchar(40) NOT NULL, // overskrift
+TEXT varchar(1000) NOT NULL, // text I annonce
+PRICE int NOT NULL, // pris
+USER_FK varchar(40) NOT NULL, user foreign key
+CREATION_DATE date NOT NULL, //oprettelses dato
+CONSTRAINT USER_FK foreign key(USER_FK) references AD_USER(ID),
+CONSTRAINT PRICE CHECK(PRICE>=0)) // mulig constraint
