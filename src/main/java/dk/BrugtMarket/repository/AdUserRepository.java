@@ -25,7 +25,8 @@ public class AdUserRepository implements IRepository<Ad_User> {
 
     @Override
     public void remove(Id id) {
-
+        Ad_UserPO userToRemove = entityManager.find(Ad_UserPO.class, id);
+        entityManager.remove(userToRemove);
     }
 
     @Override

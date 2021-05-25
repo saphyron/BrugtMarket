@@ -15,14 +15,14 @@ public class ReadUserDTO {
     private String phoneCode;
     private String email;
     private Date creation;
-    private List<CreateAdvertisementDTO> advertisements;
-    private CreateCityDTO city;
+    private List<AdvertisementDTO> advertisements;
+    private CityDTO city;
     private String type;
 
     public ReadUserDTO(String firstName, String lastName, String companyName,
                        String phoneNumber, String phoneCode, String email,
-                       Date creation, List<CreateAdvertisementDTO> advertisements,
-                       CreateCityDTO city, String type) {
+                       Date creation, List<AdvertisementDTO> advertisements,
+                       CityDTO city, String type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyName = companyName;
@@ -63,11 +63,11 @@ public class ReadUserDTO {
         return creation;
     }
 
-    public List<CreateAdvertisementDTO> getAdvertisements() {
+    public List<AdvertisementDTO> getAdvertisements() {
         return advertisements;
     }
 
-    public CreateCityDTO getCity() {
+    public CityDTO getCity() {
         return city;
     }
 

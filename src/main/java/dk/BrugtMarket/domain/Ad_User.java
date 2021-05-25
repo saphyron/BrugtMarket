@@ -79,6 +79,10 @@ public class Ad_User {
         return type;
     }
 
+    public Advertisement findAdvertisement (Id advertisementId) {
+        return advertisements.stream().filter(a-> a.getId().equals(advertisementId)).findFirst().orElse(null);
+    }
+
     @Override
     public String toString() {
         return "Ad_User{" +

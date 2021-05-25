@@ -9,11 +9,10 @@
         <jta-data-source>demoDS</jta-data-source>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-			<property name="javax.persistence.schema-generation.database.action" value="none" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />
 			<property name="javax.persistence.schema-generation.scripts.action" value="none" />
 			<property name="javax.persistence.schema-generation.scripts.create-target" value="none" />
-			<property name="javax.persistence.sql-load-script-source" value="META-INF/sql/SeedDB.sql" />
+			<property name="javax.persistence.schema-generation.database.action" value="none" />
         </properties>
     </persistence-unit>
 </persistence>

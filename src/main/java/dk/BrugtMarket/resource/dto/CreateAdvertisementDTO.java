@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class CreateAdvertisementDTO {
 
+    private String id;
     private String category;
     private String type;
     private String headline;
@@ -16,6 +17,7 @@ public class CreateAdvertisementDTO {
 
     @JsonCreator
     public CreateAdvertisementDTO(
+            @JsonProperty("id") String id,
             @JsonProperty("category") String category,
             @JsonProperty("type") String type,
             @JsonProperty("headline") String headline,
@@ -23,12 +25,17 @@ public class CreateAdvertisementDTO {
             @JsonProperty("price") int price,
             @JsonProperty("creation") Date creation
     ) {
+        this.id = id;
         this.category = category;
         this.type = type;
         this.headline = headline;
         this.text = text;
         this.price = price;
         this.creation = creation;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getCategory() {
@@ -58,6 +65,7 @@ public class CreateAdvertisementDTO {
     @Override
     public String toString() {
         return "CreateAdvertisementDTO{" +
+                "id='" + id + '\'' +
                 "category='" + category + '\'' +
                 ", type='" + type + '\'' +
                 ", headline='" + headline + '\'' +

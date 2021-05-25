@@ -1,6 +1,5 @@
 package dk.BrugtMarket.repository;
 
-import dk.BrugtMarket.domain.Ad_User;
 import dk.BrugtMarket.domain.Advertisement;
 import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.repository.entity.AdvertisementPO;
@@ -12,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
 
+@Dependent
 public class AdvertisementRepository implements IRepository<Advertisement> {
 
     private final EntityManager entityManager;

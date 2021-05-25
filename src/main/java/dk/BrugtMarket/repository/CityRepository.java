@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
 
+@Dependent
 public class CityRepository implements IRepository<City> {
 
     private final EntityManager entityManager;

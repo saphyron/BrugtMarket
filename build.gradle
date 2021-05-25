@@ -5,7 +5,7 @@ plugins {
 }
 
 
-group 'dk.QuizGame'
+group 'dk.BrugtMarket'
 version '1.0-SNAPSHOT'
 description = """Quiz-Game"""
 
@@ -29,7 +29,7 @@ task copyResources(type: Copy) {
 
 ext {
     helidonversion = '2.0.1'
-    javaMainClass = 'dk.QuizGame.Main'
+    javaMainClass = 'dk.BrugtMarket.Main'
 }
 
 application {
