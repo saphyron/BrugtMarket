@@ -20,6 +20,6 @@ public class CityService {
 
     public void remove(Id id) { repository.remove(id); }
     public List<City> getAllCities() { return repository.getAll(); }
-    public void insertUser(City adUser) { repository.insert(adUser); }
+    public void insert(City adUser) { repository.insert(adUser); }
     public City getById(Id id) { return repository.getById(id); }
 }

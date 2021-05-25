@@ -17,11 +17,30 @@ public class Ad_User {
     private final Type type;
 
     public Ad_User(
-            Id id, First_Name first, Last_Name last, Company_Name company,
+            First_Name first, Last_Name last, Company_Name company,
             Phone_Number phone, Phone_Code phc, Email email,
             Creation_Date creation, List<Advertisement> advertisements,
             City city, Type type
             ) {
+        this.id = null;
+        this.first = first;
+        this.last = last;
+        this.company = company;
+        this.phone = phone;
+        this.phc = phc;
+        this.email = email;
+        this.creation = creation;
+        this.advertisements = advertisements;
+        this.city = city;
+        this.type = type;
+    }
+
+    public Ad_User(
+            Id id, First_Name first, Last_Name last, Company_Name company,
+            Phone_Number phone, Phone_Code phc, Email email,
+            Creation_Date creation, List<Advertisement> advertisements,
+            City city, Type type
+    ) {
         this.id = id;
         this.first = first;
         this.last = last;

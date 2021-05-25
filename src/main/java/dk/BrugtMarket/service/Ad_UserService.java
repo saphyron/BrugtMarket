@@ -25,9 +25,5 @@ public class Ad_UserService {
     public void insertUser(Ad_User adUser) { repository.insert(adUser); }
     public Ad_User getById(Id id) { return repository.getById(id); }
     public List<Ad_User> getByQId(Id id) { return repository.getByQId(id); }
-    public Advertisement receiveAdvertisement(AdvertisementRequest advertisementRequest){
-        Ad_User adUser = repository.getById(advertisementRequest.getAdvertisementId());
-        return adUser.findAdvertisement(advertisementRequest.getUserId());
-    }
 
 }

@@ -1,9 +1,13 @@
 package dk.BrugtMarket.repository;
 
+import dk.BrugtMarket.domain.Ad_User;
 import dk.BrugtMarket.domain.Advertisement;
 import dk.BrugtMarket.domain.Id;
+import dk.BrugtMarket.repository.entity.Ad_UserPO;
 import dk.BrugtMarket.repository.entity.AdvertisementPO;
+import dk.BrugtMarket.repository.entitymanager.DemoEntityManager;
 import dk.BrugtMarket.repository.interfaces.IRepository;
+import dk.BrugtMarket.resource.dto.CreateAdvertisementDTO;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -18,8 +22,8 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
     private final Mapper mapper;
 
     @Inject
-    public AdvertisementRepository(EntityManager entityManager, Mapper mapper) {
-        this.entityManager = entityManager;
+    public AdvertisementRepository(DemoEntityManager entityManager, Mapper mapper) {
+        this.entityManager = entityManager.getEntityManager();
         this.mapper = mapper;
     }
 
@@ -56,7 +60,7 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
         }
     }
 
-    public List<Advertisement> getByGId(Id id) {
+    /*public List<Advertisement> getByGId(Id id) {
         try {
             return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_BY_CATEGORY, AdvertisementPO.class)
                         .setParameter(AdvertisementPO.GID_PARAMETER, id)
@@ -64,13 +68,30 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
         } catch (NoResultException e) {
             return null;
         }
-    }
+    }*/
 
-    public List<Advertisement> getAllCategories() {
+    /*public List<Advertisement> getAllCategories() {
         try {
             return mapper.mapAdvertisement(entityManager.createNamedQuery(AdvertisementPO.FIND_ALL_CATEGORIES, AdvertisementPO.class).getResultList());
         } catch (NoResultException e) {
             return null;
         }
+    }*/
+
+    public Ad_User insertAdvertisement(Id id, CreateAdvertisementDTO advertisement) {
+        Ad_UserPO adUser = entityManager.find(Ad_UserPO.class, id.getId());
+        AdvertisementPO advertisement1 = new AdvertisementPO(
+                advertisement.getCategory(),
+                advertisement.getType(),
+                advertisement.getHeadline(),
+                advertisement.getText(),
+                advertisement.getPrice(),
+                advertisement.getCreation()
+        );
+        adUser.addAdvertisement(advertisement1);
+        entityManager.persist(advertisement1);
+        return mapper.mapUser(adUser);
     }
+
+
 }

@@ -17,9 +17,7 @@ import java.util.UUID;
 @Table(name = "ADVERTISEMENT")
 @NamedQueries({
         @NamedQuery(name = "AdvertisementPO.findAll", query = "Select q from AdvertisementPO q"),
-        @NamedQuery(name = "AdvertisementPO.findByQID", query = "Select q from AdvertisementPO q where q.id=:QID"),
-        @NamedQuery(name = "AdvertisementPO.findCategories", query = "Select q.CATEGORY from AdvertisementPO q where q.category=:GID"),
-        @NamedQuery(name = "AdvertisementPO.findAllCategories", query = "Select q.CATEGORY from AdvertisementPO q")
+        @NamedQuery(name = "AdvertisementPO.findByQID", query = "Select q from AdvertisementPO q where q.id=:QID")
 })
 
 public class AdvertisementPO {
@@ -28,8 +26,6 @@ public class AdvertisementPO {
     public static final String QID_PARAMETER = "QID";
     public static final String FIND_BY_QID = "AdvertisementPO.findByQID";
     public static final String GID_PARAMETER = "GID";
-    public static final String FIND_BY_CATEGORY = "AdvertisementPO.findCategories";
-    public static final String FIND_ALL_CATEGORIES = "AdvertisementPO.findAllCategories";
 
     @Id
     @GeneratedValue
@@ -39,11 +35,11 @@ public class AdvertisementPO {
 
     @Column(name = "CATEGORY", columnDefinition = "VARCHAR(40)", nullable = false)
     @XmlElement(name = "category", required = true)
-    private Category category;
+    private String category;
 
     @Column(name = "SALES_TYPE", columnDefinition = "VARCHAR(40)", nullable = false)
     @XmlElement(name = "salesType", required = true)
-    private Sales_Type salesType;
+    private String salesType;
 
     @Column(name = "HEADLINE", columnDefinition = "VARCHAR(40)", nullable = false)
     @XmlElement(name = "headline", required = true)
@@ -58,14 +54,14 @@ public class AdvertisementPO {
     private int price;
 
     @ManyToOne()
-    @JoinColumn(name = "user", nullable = false)
+    @JoinColumn(name = "User_ID_FK", referencedColumnName = "ID", nullable = false)
     private Ad_UserPO userPO;
 
     @Column(name = "CREATION_DATE", columnDefinition = "date", nullable = false)
     @XmlElement(name = "creationDate", required = true)
     private Date creationDate;
 
-    public AdvertisementPO(Category category, Sales_Type salesType, String headline, String text, int price, Date creationDate) {
+    public AdvertisementPO(String category, String salesType, String headline, String text, int price, Date creationDate) {
         this.category = category;
         this.salesType = salesType;
         this.headline = headline;
@@ -81,11 +77,11 @@ public class AdvertisementPO {
         return id;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public Sales_Type getSalesType() {
+    public String getSalesType() {
         return salesType;
     }
 
@@ -111,30 +107,6 @@ public class AdvertisementPO {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public void setSalesType(Sales_Type salesType) {
-        this.salesType = salesType;
-    }
-
-    public void setHeadline(String headline) {
-        this.headline = headline;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
     }
 
     public void setUser(Ad_UserPO userPO) {

@@ -5,10 +5,15 @@ import dk.BrugtMarket.repository.entity.Ad_UserPO;
 import dk.BrugtMarket.repository.entity.AdvertisementPO;
 import dk.BrugtMarket.repository.entity.CityPO;
 
+import javax.enterprise.context.Dependent;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Dependent
 public class Mapper {
+
+    // TODO: 25/05/2021 mapCategoryPO
+
     public List<Ad_User> mapUsers(List<Ad_UserPO> users) {
         return users.stream().map(a->mapUser(a)).collect(Collectors.toList());
     }
@@ -45,8 +50,8 @@ public class Mapper {
                 adUser.getPhone().getNumber(),
                 adUser.getPhc().getCode(),
                 adUser.getEmail().getEmail(),
-                adUser.getCreation().getDate(),
                 mapCityPO(adUser.getCity()),
+                adUser.getCreation().getDate(),
                 adUser.getType().getType()
         );
     }
@@ -68,8 +73,8 @@ public class Mapper {
     public Advertisement mapAdvertisement(AdvertisementPO advertisementPO) {
         return new Advertisement(
                 new Id(advertisementPO.getId()),
-                advertisementPO.getCategory(),
-                advertisementPO.getSalesType(),
+                new Category(advertisementPO.getCategory()),
+                new Sales_Type(advertisementPO.getSalesType()),
                 new Headline(advertisementPO.getHeadline()),
                 new Text(advertisementPO.getText()),
                 new Price(advertisementPO.getPrice()),
@@ -83,8 +88,8 @@ public class Mapper {
 
     public AdvertisementPO mapAdvertisementPO(Advertisement advertisement) {
         return new AdvertisementPO(
-                advertisement.getCategory(),
-                advertisement.getType(),
+                advertisement.getCategory().getCategory(),
+                advertisement.getType().getType(),
                 advertisement.getHeadline().getHeadline(),
                 advertisement.getText().getText(),
                 advertisement.getPrice().getPrice(),

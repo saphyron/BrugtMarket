@@ -4,6 +4,7 @@ import dk.BrugtMarket.domain.Ad_User;
 import dk.BrugtMarket.domain.City;
 import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.repository.entity.CityPO;
+import dk.BrugtMarket.repository.entitymanager.DemoEntityManager;
 import dk.BrugtMarket.repository.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
@@ -19,8 +20,8 @@ public class CityRepository implements IRepository<City> {
     private final Mapper mapper;
 
     @Inject
-    public CityRepository(EntityManager entityManager, Mapper mapper) {
-        this.entityManager = entityManager;
+    public CityRepository(DemoEntityManager entityManager, Mapper mapper) {
+        this.entityManager = entityManager.getEntityManager();
         this.mapper = mapper;
     }
 

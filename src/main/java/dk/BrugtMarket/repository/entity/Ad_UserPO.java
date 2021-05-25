@@ -62,20 +62,20 @@ public class Ad_UserPO {
     private Date creationDate;
 
     @OneToOne
-    @JoinColumn(name = "city_fk", referencedColumnName = "ZIP_CODE", nullable = false)
+    @JoinColumn(name = "city_fk", referencedColumnName = "ZIP_CODE")
     private CityPO city;
 
     @Column(name = "TYPE", columnDefinition = "VARCHAR(10)", nullable = false)
     @XmlElement(name = "type", required = true)
     private String type;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userPO", fetch = FetchType.EAGER)
     private List<AdvertisementPO> advertisements;
 
     public Ad_UserPO(
             String firstName, String lastName, String companyName,
-            String phoneNumber, String phoneCode, String email,
-            Date creationDate, CityPO city, String type) {
+            String phoneNumber, String phoneCode, String email, CityPO city,
+            Date creationDate, String type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyName = companyName;

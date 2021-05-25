@@ -14,9 +14,11 @@ import java.util.stream.Collectors;
 @Dependent
 class Mapper {
 
+    // TODO: 25/05/2021 MapCategory
+
     Id mapId (String id) { return new Id(id); }
-    Category mapCategory (String category) { return Category.valueOf(category); }
-    Sales_Type mapSalesType (String salesType) { return Sales_Type.valueOf(salesType); }
+    Category mapCategory (String category) { return new Category(category); }
+    Sales_Type mapSalesType (String salesType) { return new Sales_Type(salesType); }
     Headline mapHeadline (String headline) { return new Headline(headline); }
     Text mapText (String text) { return new Text(text); }
     Price mapPrice (int price) { return new Price(price); }
@@ -24,7 +26,6 @@ class Mapper {
 
     Advertisement mapAdvertisement(CreateAdvertisementDTO createAdvertisementDTO) {
         return new Advertisement(
-                mapId(createAdvertisementDTO.getId()),
                 mapCategory(createAdvertisementDTO.getCategory()),
                 mapSalesType(createAdvertisementDTO.getType()),
                 mapHeadline(createAdvertisementDTO.getHeadline()),
@@ -38,14 +39,10 @@ class Mapper {
         return createAdvertisementDTOS.stream().map(this::mapAdvertisement).collect(Collectors.toList());
     }
 
-    AdvertisementRequest mapCreateUserAdvertisement(String advertisementId, CreateUserAdvertisementDTO createUserAdvertisementDTO) {
-        return new AdvertisementRequest(mapId(advertisementId),mapId(createUserAdvertisementDTO.getAdvertisement()));
-    }
-
     ReadAdvertisementDTO mapReadAdvertisement(Advertisement advertisement) {
         return new ReadAdvertisementDTO(
-                advertisement.getCategory().name(),
-                advertisement.getType().name(),
+                advertisement.getCategory().getCategory(),
+                advertisement.getType().getType(),
                 advertisement.getHeadline().getHeadline(),
                 advertisement.getText().getText(),
                 advertisement.getPrice().getPrice(),
@@ -91,7 +88,6 @@ class Mapper {
 
     Ad_User mapUser(CreateUserDTO createUserDTO) {
         return new Ad_User(
-                mapId(createUserDTO.getId()),
                 mapFirst(createUserDTO.getFirstName()),
                 mapLast(createUserDTO.getLastName()),
                 mapCompany(createUserDTO.getCompanyName()),
@@ -105,15 +101,11 @@ class Mapper {
         );
     }
 
-    List<Ad_User> mapUser(List<CreateUserDTO> createUserDTOS) {
-        return createUserDTOS.stream().map(this::mapUser).collect(Collectors.toList());
-    }
-
     AdvertisementDTO mapAdvertisementDTO(Advertisement advertisement) {
         return new AdvertisementDTO(
                 advertisement.getId().getId().toString(),
-                advertisement.getCategory().name(),
-                advertisement.getType().name(),
+                advertisement.getCategory().getCategory(),
+                advertisement.getType().getType(),
                 advertisement.getHeadline().getHeadline(),
                 advertisement.getText().getText(),
                 advertisement.getPrice().getPrice(),

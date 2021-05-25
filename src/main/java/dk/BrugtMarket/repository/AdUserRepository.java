@@ -1,8 +1,11 @@
 package dk.BrugtMarket.repository;
 
 import dk.BrugtMarket.domain.Ad_User;
+import dk.BrugtMarket.domain.Advertisement;
 import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.repository.entity.Ad_UserPO;
+import dk.BrugtMarket.repository.entity.AdvertisementPO;
+import dk.BrugtMarket.repository.entitymanager.DemoEntityManager;
 import dk.BrugtMarket.repository.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
@@ -18,8 +21,8 @@ public class AdUserRepository implements IRepository<Ad_User> {
     private final Mapper mapper;
 
     @Inject
-    public AdUserRepository(EntityManager entityManager, Mapper mapper) {
-        this.entityManager = entityManager;
+    public AdUserRepository(DemoEntityManager entityManager, Mapper mapper) {
+        this.entityManager = entityManager.getEntityManager();
         this.mapper = mapper;
     }
 
@@ -43,8 +46,8 @@ public class AdUserRepository implements IRepository<Ad_User> {
                 user.getPhone().getNumber(),
                 user.getPhc().getCode(),
                 user.getEmail().getEmail(),
-                user.getCreation().getDate(),
                 mapper.mapCityPO(user.getCity()),
+                user.getCreation().getDate(),
                 user.getType().getType()
         );
         user.getAdvertisements().forEach(a-> newUser.addAdvertisement(mapper.mapAdvertisementPO(a)));
@@ -67,5 +70,7 @@ public class AdUserRepository implements IRepository<Ad_User> {
             return null;
         }
     }
+
+
 
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class CreateUserDTO {
 
-    private String id;
     private String firstName;
     private String lastName;
     private String companyName;
@@ -23,7 +22,6 @@ public class CreateUserDTO {
 
     @JsonCreator
     public CreateUserDTO(
-            @JsonProperty("id") String id,
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
             @JsonProperty("companyName") String companyName,
@@ -35,7 +33,6 @@ public class CreateUserDTO {
             @JsonProperty("city") CreateCityDTO city,
             @JsonProperty("type") String type
             ) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.companyName = companyName;
@@ -46,10 +43,6 @@ public class CreateUserDTO {
         this.advertisements = advertisements;
         this.city = city;
         this.type = type;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getFirstName() {
@@ -95,7 +88,6 @@ public class CreateUserDTO {
     @Override
     public String toString() {
         return "CreateUserDTO{" +
-                "id='" + id + '\'' +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", companyName='" + companyName + '\'' +

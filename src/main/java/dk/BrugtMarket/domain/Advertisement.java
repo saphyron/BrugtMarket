@@ -24,6 +24,20 @@ public class Advertisement {
         this.creation = creation;
     }
 
+    public Advertisement(
+            Category category, Sales_Type type,
+            Headline headline, Text text, Price price,
+            Creation_Date creation
+    ) {
+        this.id = null;
+        this.category = category;
+        this.type = type;
+        this.headline = headline;
+        this.text = text;
+        this.price = price;
+        this.creation = creation;
+    }
+
     public Id getId() {
         return id;
     }

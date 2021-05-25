@@ -1,8 +1,9 @@
 package dk.BrugtMarket.resource;
 
+import dk.BrugtMarket.domain.Advertisement;
 import dk.BrugtMarket.domain.Id;
+import dk.BrugtMarket.resource.dto.AdvertisementDTO;
 import dk.BrugtMarket.resource.dto.CreateAdvertisementDTO;
-import dk.BrugtMarket.resource.dto.CreateUserAdvertisementDTO;
 import dk.BrugtMarket.resource.dto.ReadAdvertisementDTO;
 import dk.BrugtMarket.service.Ad_UserService;
 import dk.BrugtMarket.service.AdvertisementService;
@@ -49,13 +50,17 @@ public class AdvertisementResource {
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("/{userId}")
     @POST
-    public ReadAdvertisementDTO createAdvertisements(@PathParam("userId")String userID, CreateAdvertisementDTO createAdvertisementDTO, CreateUserAdvertisementDTO createUserAdvertisementDTO) {
-        service.insertAdvertisement(mapper.mapAdvertisement(createAdvertisementDTO));
-        return mapper.mapReadAdvertisement(userService.receiveAdvertisement(
-                mapper.mapCreateUserAdvertisement(userID,createUserAdvertisementDTO)
+    public void createAdvertisement(@PathParam("userId")Id userID, CreateAdvertisementDTO advertisement) {
+        service.insertAdvertisement(userID, new CreateAdvertisementDTO(
+                advertisement.getCategory(),
+                advertisement.getType(),
+                advertisement.getHeadline(),
+                advertisement.getText(),
+                advertisement.getPrice(),
+                advertisement.getCreation()
         ));
     }
+
 }
