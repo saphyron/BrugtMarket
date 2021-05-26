@@ -3,7 +3,6 @@ package dk.BrugtMarket.domain;
 public class Advertisement {
 
     private final Id id;
-    private final Category category;
     private final Sales_Type type;
     private final Headline headline;
     private final Text text;
@@ -11,12 +10,11 @@ public class Advertisement {
     private final Creation_Date creation;
 
     public Advertisement(
-            Id id, Category category, Sales_Type type,
+            Id id, Sales_Type type,
             Headline headline, Text text, Price price,
             Creation_Date creation
             ) {
         this.id = id;
-        this.category = category;
         this.type = type;
         this.headline = headline;
         this.text = text;
@@ -25,12 +23,11 @@ public class Advertisement {
     }
 
     public Advertisement(
-            Category category, Sales_Type type,
+            Sales_Type type,
             Headline headline, Text text, Price price,
             Creation_Date creation
     ) {
         this.id = null;
-        this.category = category;
         this.type = type;
         this.headline = headline;
         this.text = text;
@@ -40,10 +37,6 @@ public class Advertisement {
 
     public Id getId() {
         return id;
-    }
-
-    public Category getCategory() {
-        return category;
     }
 
     public Sales_Type getType() {
@@ -71,7 +64,6 @@ public class Advertisement {
     public String toString() {
         return "Advertisement{" +
                 "id=" + id +
-                ", category=" + category +
                 ", type=" + type +
                 ", headline=" + headline +
                 ", text=" + text +

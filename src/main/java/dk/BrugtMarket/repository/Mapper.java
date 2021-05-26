@@ -3,6 +3,7 @@ package dk.BrugtMarket.repository;
 import dk.BrugtMarket.domain.*;
 import dk.BrugtMarket.repository.entity.Ad_UserPO;
 import dk.BrugtMarket.repository.entity.AdvertisementPO;
+import dk.BrugtMarket.repository.entity.CategoryPO;
 import dk.BrugtMarket.repository.entity.CityPO;
 
 import javax.enterprise.context.Dependent;
@@ -12,18 +13,33 @@ import java.util.stream.Collectors;
 @Dependent
 public class Mapper {
 
-    // TODO: 25/05/2021 mapCategoryPO
+    public List<Category> mapCategories(List<CategoryPO> categories) {
+        return categories.stream().map(this::mapCategory).collect(Collectors.toList());
+    }
 
     public List<Ad_User> mapUsers(List<Ad_UserPO> users) {
-        return users.stream().map(a->mapUser(a)).collect(Collectors.toList());
+        return users.stream().map(this::mapUser).collect(Collectors.toList());
     }
 
     public List<City> mapCities(List<CityPO> cities) {
-        return cities.stream().map(a->mapCity(a)).collect(Collectors.toList());
+        return cities.stream().map(this::mapCity).collect(Collectors.toList());
     }
 
     public List<Advertisement> mapAdvertisements(List<AdvertisementPO> advertisements) {
-        return advertisements.stream().map(a->mapAdvertisement(a)).collect(Collectors.toList());
+        return advertisements.stream().map(this::mapAdvertisement).collect(Collectors.toList());
+    }
+
+    public Category mapCategory(CategoryPO categoryPO) {
+        return new Category(
+                categoryPO.getCategory(),
+                mapAdvertisement(categoryPO.getAdvertisement())
+        );
+    }
+
+    public CategoryPO mapCategoryPO(Category category) {
+        return new CategoryPO(
+                category.getCategory()
+        );
     }
 
     public Ad_User mapUser(Ad_UserPO adUserPO) {
@@ -66,14 +82,13 @@ public class Mapper {
     public CityPO mapCityPO(City city) {
         return new CityPO(
                 city.getCity(),
-                city.getZip().toString()
+                city.getZip().getZip()
         );
     }
 
     public Advertisement mapAdvertisement(AdvertisementPO advertisementPO) {
         return new Advertisement(
                 new Id(advertisementPO.getId()),
-                new Category(advertisementPO.getCategory()),
                 new Sales_Type(advertisementPO.getSalesType()),
                 new Headline(advertisementPO.getHeadline()),
                 new Text(advertisementPO.getText()),
@@ -84,21 +99,6 @@ public class Mapper {
 
     public List<Advertisement> mapAdvertisement(List<AdvertisementPO> advertisements) {
         return advertisements.stream().map(this::mapAdvertisement).collect(Collectors.toList());
-    }
-
-    public AdvertisementPO mapAdvertisementPO(Advertisement advertisement) {
-        return new AdvertisementPO(
-                advertisement.getCategory().getCategory(),
-                advertisement.getType().getType(),
-                advertisement.getHeadline().getHeadline(),
-                advertisement.getText().getText(),
-                advertisement.getPrice().getPrice(),
-                advertisement.getCreation().getDate()
-        );
-    }
-
-    public List<AdvertisementPO> mapAdvertisementPO(List<Advertisement> advertisements) {
-        return advertisements.stream().map(this::mapAdvertisementPO).collect(Collectors.toList());
     }
 
 }

@@ -14,10 +14,7 @@ import java.util.stream.Collectors;
 @Dependent
 class Mapper {
 
-    // TODO: 25/05/2021 MapCategory
-
     Id mapId (String id) { return new Id(id); }
-    Category mapCategory (String category) { return new Category(category); }
     Sales_Type mapSalesType (String salesType) { return new Sales_Type(salesType); }
     Headline mapHeadline (String headline) { return new Headline(headline); }
     Text mapText (String text) { return new Text(text); }
@@ -26,7 +23,6 @@ class Mapper {
 
     Advertisement mapAdvertisement(CreateAdvertisementDTO createAdvertisementDTO) {
         return new Advertisement(
-                mapCategory(createAdvertisementDTO.getCategory()),
                 mapSalesType(createAdvertisementDTO.getType()),
                 mapHeadline(createAdvertisementDTO.getHeadline()),
                 mapText(createAdvertisementDTO.getText()),
@@ -41,7 +37,6 @@ class Mapper {
 
     ReadAdvertisementDTO mapReadAdvertisement(Advertisement advertisement) {
         return new ReadAdvertisementDTO(
-                advertisement.getCategory().getCategory(),
                 advertisement.getType().getType(),
                 advertisement.getHeadline().getHeadline(),
                 advertisement.getText().getText(),
@@ -67,16 +62,7 @@ class Mapper {
         return cityDTO.stream().map(this::mapCity).collect(Collectors.toList());
     }
 
-    ReadCityDTO mapReadCity(City city) {
-        return new ReadCityDTO(
-                city.getCity(),
-                city.getZip().getZip()
-        );
-    }
 
-    List<ReadCityDTO> mapReadCity(List<City> city) {
-        return city.stream().map(this::mapReadCity).collect(Collectors.toList());
-    }
 
     First_Name mapFirst (String first) { return new First_Name(first); }
     Last_Name mapLast (String last) { return new Last_Name(last); }
@@ -101,10 +87,16 @@ class Mapper {
         );
     }
 
+    Category mapCategory(CreateCategoryDTO createCategoryDTO) {
+        return new Category(
+                createCategoryDTO.getCategory(),
+                mapAdvertisement(createCategoryDTO.getAdvertisements())
+        );
+    }
+
     AdvertisementDTO mapAdvertisementDTO(Advertisement advertisement) {
         return new AdvertisementDTO(
                 advertisement.getId().getId().toString(),
-                advertisement.getCategory().getCategory(),
                 advertisement.getType().getType(),
                 advertisement.getHeadline().getHeadline(),
                 advertisement.getText().getText(),
@@ -139,8 +131,32 @@ class Mapper {
         );
     }
 
+    ReadCategoryDTO mapReadCategories(Category category) {
+        return new ReadCategoryDTO(
+                category.getCategory(),
+                mapAdvertisementDTO(category.getAdvertisement())
+        );
+    }
+
     List<ReadUserDTO> mapReadUser(List<Ad_User> user) {
         return user.stream().map(this::mapReadUser).collect(Collectors.toList());
+    }
+
+    ReadCityDTO mapReadCity(City city) {
+        return new ReadCityDTO(
+                city.getCity(),
+                city.getZip().getZip()
+        );
+    }
+
+    List<ReadCityDTO> mapReadCity(List<City> city) {
+        return city.stream().map(this::mapReadCity).collect(Collectors.toList());
+    }
+
+
+
+    List<ReadCategoryDTO> mapReadCategories(List<Category> categories) {
+        return categories.stream().map(this::mapReadCategories).collect(Collectors.toList());
     }
 
 

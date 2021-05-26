@@ -7,7 +7,6 @@ import java.util.Date;
 public class AdvertisementDTO {
 
     private String id;
-    private String category;
     private String type;
     private String headline;
     private String text;
@@ -15,12 +14,11 @@ public class AdvertisementDTO {
     private Date creation;
 
     public AdvertisementDTO(
-            String id, String category, String type,
+            String id, String type,
             String headline, String text, int price,
             Date creation
     ) {
         this.id = id;
-        this.category = category;
         this.type = type;
         this.headline = headline;
         this.text = text;
@@ -30,10 +28,6 @@ public class AdvertisementDTO {
 
     public String getId() {
         return id;
-    }
-
-    public String getCategory() {
-        return category;
     }
 
     public String getType() {

@@ -6,7 +6,6 @@ import dk.BrugtMarket.service.Ad_UserService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -24,18 +23,15 @@ public class Ad_UserResource {
     }
 
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("")
+    @Path("/")
     @GET
     public List<ReadUserDTO> getAll() {
-        try {
-            return mapper.mapReadUser(userService.getAllUsers());
-        } catch (NoResultException e) {
-            throw new NoResultException(e.getMessage());
-        }
+        return mapper.mapReadUser(userService.getAllUsers());
+
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("")
+    @Path("/")
     @POST
     public void createUser(CreateUserDTO createUserDTO) {
         userService.insertUser(mapper.mapUser(createUserDTO));

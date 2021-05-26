@@ -18,6 +18,7 @@ import java.util.UUID;
 @NamedQueries({
         @NamedQuery(name = "AdvertisementPO.findAll", query = "Select q from AdvertisementPO q"),
         @NamedQuery(name = "AdvertisementPO.findByQID", query = "Select q from AdvertisementPO q where q.id=:QID")
+        //@NamedQuery(name = "AdvertisementPO.findByCategory", query = "select")
 })
 
 public class AdvertisementPO {
@@ -33,9 +34,9 @@ public class AdvertisementPO {
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
     private UUID id;
 
-    @Column(name = "CATEGORY", columnDefinition = "VARCHAR(40)", nullable = false)
-    @XmlElement(name = "category", required = true)
-    private String category;
+    @ManyToOne()
+    @JoinColumn(name = "category_fk", referencedColumnName = "Category")
+    private CategoryPO category;
 
     @Column(name = "SALES_TYPE", columnDefinition = "VARCHAR(40)", nullable = false)
     @XmlElement(name = "salesType", required = true)
@@ -61,8 +62,8 @@ public class AdvertisementPO {
     @XmlElement(name = "creationDate", required = true)
     private Date creationDate;
 
-    public AdvertisementPO(String category, String salesType, String headline, String text, int price, Date creationDate) {
-        this.category = category;
+    public AdvertisementPO(CategoryPO categoryPO, String salesType, String headline, String text, int price, Date creationDate) {
+        this.category = categoryPO;
         this.salesType = salesType;
         this.headline = headline;
         this.text = text;
@@ -77,7 +78,7 @@ public class AdvertisementPO {
         return id;
     }
 
-    public String getCategory() {
+    public CategoryPO getCategory() {
         return category;
     }
 
@@ -112,6 +113,10 @@ public class AdvertisementPO {
     public void setUser(Ad_UserPO userPO) {
 
         this.userPO = userPO;
+    }
+
+    public void setCategory(CategoryPO categoryPO) {
+        this.category = categoryPO;
     }
 
 

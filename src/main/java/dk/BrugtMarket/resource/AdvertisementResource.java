@@ -1,8 +1,7 @@
 package dk.BrugtMarket.resource;
 
-import dk.BrugtMarket.domain.Advertisement;
+import dk.BrugtMarket.domain.Category;
 import dk.BrugtMarket.domain.Id;
-import dk.BrugtMarket.resource.dto.AdvertisementDTO;
 import dk.BrugtMarket.resource.dto.CreateAdvertisementDTO;
 import dk.BrugtMarket.resource.dto.ReadAdvertisementDTO;
 import dk.BrugtMarket.service.Ad_UserService;
@@ -10,12 +9,11 @@ import dk.BrugtMarket.service.AdvertisementService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("advertisements")
+@Path("/advertisements")
 @RequestScoped
 public class AdvertisementResource {
     private final AdvertisementService service;
@@ -30,30 +28,27 @@ public class AdvertisementResource {
     }
 
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("")
+    @Path("/")
     @GET
     public List<ReadAdvertisementDTO> getAll() {
-        try {
-            return mapper.mapReadAdvertisement(service.getAllAdvertisements());
-        } catch (NoResultException e) {
-            throw new NoResultException(e.getMessage());
-        }
+        return mapper.mapReadAdvertisement(service.getAllAdvertisements());
+
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @GET
-    public ReadAdvertisementDTO getById(@PathParam("id") Id id) {
-        ReadAdvertisementDTO selectedAdvertisement = mapper.mapReadAdvertisement(service.getById(id));
+    public ReadAdvertisementDTO getById(@PathParam("id") String id) {
+        ReadAdvertisementDTO selectedAdvertisement = mapper.mapReadAdvertisement(service.getById(new Id(id)));
         return selectedAdvertisement;
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/{userId}")
+    @Path("/User/{userId}")
     @POST
-    public void createAdvertisement(@PathParam("userId")Id userID, CreateAdvertisementDTO advertisement) {
-        service.insertAdvertisement(userID, new CreateAdvertisementDTO(
+    public void createAdvertisement(@PathParam("userId") String userID, CreateAdvertisementDTO advertisement) {
+        service.insertAdvertisement(new Id(userID), new CreateAdvertisementDTO(
                 advertisement.getCategory(),
                 advertisement.getType(),
                 advertisement.getHeadline(),
@@ -62,5 +57,18 @@ public class AdvertisementResource {
                 advertisement.getCreation()
         ));
     }
+
+    /*@Consumes(MediaType.APPLICATION_JSON)
+    @Path("/category/{categoryId}")
+    @POST
+    public void insertAdvertisementCategory(@PathParam("categoryId") String categoryId, CreateAdvertisementDTO advertisement) {
+        service.insertAdvertisementCategory(categoryId, new CreateAdvertisementDTO(
+                advertisement.getType(),
+                advertisement.getHeadline(),
+                advertisement.getText(),
+                advertisement.getPrice(),
+                advertisement.getCreation()
+        ));
+    }*/
 
 }

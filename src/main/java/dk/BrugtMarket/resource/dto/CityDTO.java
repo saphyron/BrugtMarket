@@ -1,6 +1,5 @@
 package dk.BrugtMarket.resource.dto;
 
-import dk.BrugtMarket.domain.Zip_Code;
 
 public class CityDTO {
 

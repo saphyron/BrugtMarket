@@ -2,8 +2,10 @@ package dk.BrugtMarket.service;
 
 import dk.BrugtMarket.domain.Ad_User;
 import dk.BrugtMarket.domain.Advertisement;
+import dk.BrugtMarket.domain.Category;
 import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.repository.AdvertisementRepository;
+import dk.BrugtMarket.repository.entity.AdvertisementPO;
 import dk.BrugtMarket.resource.dto.CreateAdvertisementDTO;
 
 import javax.enterprise.context.Dependent;
@@ -31,4 +33,10 @@ public class AdvertisementService {
                 id,
                 advertisement);
     }
+    /*public Category insertAdvertisementCategory(String id, CreateAdvertisementDTO advertisement) {
+        return repository.insertAdvertisementCategory(
+                id,
+                advertisement
+        );
+    }*/
 }

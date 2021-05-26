@@ -34,7 +34,10 @@ public class AdUserRepository implements IRepository<Ad_User> {
 
     @Override
     public List<Ad_User> getAll() {
-        return mapper.mapUsers(entityManager.createNamedQuery(Ad_UserPO.FIND_ALL, Ad_UserPO.class).getResultList());
+        return mapper.mapUsers(
+                entityManager.createNamedQuery(
+                        Ad_UserPO.FIND_ALL, Ad_UserPO.class
+                ).getResultList());
     }
 
     @Override
@@ -50,9 +53,7 @@ public class AdUserRepository implements IRepository<Ad_User> {
                 user.getCreation().getDate(),
                 user.getType().getType()
         );
-        user.getAdvertisements().forEach(a-> newUser.addAdvertisement(mapper.mapAdvertisementPO(a)));
         entityManager.persist(newUser);
-        newUser.getAdvertisements().forEach(entityManager::persist);
     }
 
     @Override

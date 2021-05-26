@@ -2,12 +2,15 @@ package dk.BrugtMarket.repository;
 
 import dk.BrugtMarket.domain.Ad_User;
 import dk.BrugtMarket.domain.Advertisement;
+import dk.BrugtMarket.domain.Category;
 import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.repository.entity.Ad_UserPO;
 import dk.BrugtMarket.repository.entity.AdvertisementPO;
+import dk.BrugtMarket.repository.entity.CategoryPO;
 import dk.BrugtMarket.repository.entitymanager.DemoEntityManager;
 import dk.BrugtMarket.repository.interfaces.IRepository;
 import dk.BrugtMarket.resource.dto.CreateAdvertisementDTO;
+import dk.BrugtMarket.resource.dto.CreateCategoryDTO;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -40,13 +43,12 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
 
     @Override
     public void insert(Advertisement entity) {
-        AdvertisementPO newAdvertisement = mapper.mapAdvertisementPO(entity);
-        this.entityManager.persist(newAdvertisement);
+        //kan fjernes
     }
 
     @Override
     public Advertisement getById(Id id) {
-        Advertisement foundAdvertisement = mapper.mapAdvertisement(entityManager.find(AdvertisementPO.class, id));
+        Advertisement foundAdvertisement = mapper.mapAdvertisement(entityManager.find(AdvertisementPO.class, id.getId()));
         return foundAdvertisement;
     }
 
@@ -60,7 +62,7 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
         }
     }
 
-    /*public List<Advertisement> getByGId(Id id) {
+    /*public List<Advertisement> getByCategory(Id id) {
         try {
             return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_BY_CATEGORY, AdvertisementPO.class)
                         .setParameter(AdvertisementPO.GID_PARAMETER, id)
@@ -70,18 +72,11 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
         }
     }*/
 
-    /*public List<Advertisement> getAllCategories() {
-        try {
-            return mapper.mapAdvertisement(entityManager.createNamedQuery(AdvertisementPO.FIND_ALL_CATEGORIES, AdvertisementPO.class).getResultList());
-        } catch (NoResultException e) {
-            return null;
-        }
-    }*/
-
     public Ad_User insertAdvertisement(Id id, CreateAdvertisementDTO advertisement) {
         Ad_UserPO adUser = entityManager.find(Ad_UserPO.class, id.getId());
+        CategoryPO categoryPO = entityManager.find(CategoryPO.class, advertisement.getCategory());
         AdvertisementPO advertisement1 = new AdvertisementPO(
-                advertisement.getCategory(),
+                categoryPO,
                 advertisement.getType(),
                 advertisement.getHeadline(),
                 advertisement.getText(),

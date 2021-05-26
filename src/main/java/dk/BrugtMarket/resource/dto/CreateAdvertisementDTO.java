@@ -31,7 +31,6 @@ public class CreateAdvertisementDTO {
         this.creation = creation;
     }
 
-
     public String getCategory() {
         return category;
     }
@@ -56,15 +55,4 @@ public class CreateAdvertisementDTO {
         return creation;
     }
 
-    @Override
-    public String toString() {
-        return "CreateAdvertisementDTO{" +
-                "category='" + category + '\'' +
-                ", type='" + type + '\'' +
-                ", headline='" + headline + '\'' +
-                ", text='" + text + '\'' +
-                ", price=" + price +
-                ", creation=" + creation +
-                '}';
-    }
 }

@@ -7,24 +7,18 @@ import java.util.Date;
 
 public class ReadAdvertisementDTO {
 
-    private String category;
     private String type;
     private String headline;
     private String text;
     private int price;
     private Date creation;
 
-    public ReadAdvertisementDTO(String category, String type, String headline, String text, int price, Date creation) {
-        this.category = category;
+    public ReadAdvertisementDTO( String type, String headline, String text, int price, Date creation) {
         this.type = type;
         this.headline = headline;
         this.text = text;
         this.price = price;
         this.creation = creation;
-    }
-
-    public String getCategory() {
-        return category;
     }
 
     public String getType() {
@@ -50,7 +44,6 @@ public class ReadAdvertisementDTO {
     @Override
     public String toString() {
         return "ReadAdvertisementDTO{" +
-                "category='" + category + '\'' +
                 ", type='" + type + '\'' +
                 ", headline='" + headline + '\'' +
                 ", text='" + text + '\'' +

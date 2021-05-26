@@ -33,7 +33,10 @@ public class CityRepository implements IRepository<City> {
 
     @Override
     public List<City> getAll() {
-        return mapper.mapCities(entityManager.createNamedQuery(CityPO.FIND_ALL, CityPO.class).getResultList());
+        return mapper.mapCities(
+                entityManager.createNamedQuery(
+                        CityPO.FIND_ALL, CityPO.class
+                ).getResultList());
     }
 
     @Override
