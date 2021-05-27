@@ -54,23 +54,15 @@ public class AdvertisementRepository implements IRepository<Advertisement> {
 
     public List<Advertisement> getByQId(Id id) {
         try {
-            return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_BY_QID, AdvertisementPO.class)
+            return mapper.mapAdvertisements(
+                    entityManager.createNamedQuery(
+                            AdvertisementPO.FIND_BY_QID, AdvertisementPO.class)
                         .setParameter(AdvertisementPO.QID_PARAMETER, id)
                         .getResultList());
         } catch (NoResultException e) {
             return null;
         }
     }
-
-    /*public List<Advertisement> getByCategory(Id id) {
-        try {
-            return mapper.mapAdvertisements(entityManager.createNamedQuery(AdvertisementPO.FIND_BY_CATEGORY, AdvertisementPO.class)
-                        .setParameter(AdvertisementPO.GID_PARAMETER, id)
-                        .getResultList());
-        } catch (NoResultException e) {
-            return null;
-        }
-    }*/
 
     public Ad_User insertAdvertisement(Id id, CreateAdvertisementDTO advertisement) {
         Ad_UserPO adUser = entityManager.find(Ad_UserPO.class, id.getId());

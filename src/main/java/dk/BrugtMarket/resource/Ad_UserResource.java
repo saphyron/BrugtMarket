@@ -1,5 +1,6 @@
 package dk.BrugtMarket.resource;
 
+import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.resource.dto.CreateUserDTO;
 import dk.BrugtMarket.resource.dto.ReadUserDTO;
 import dk.BrugtMarket.service.Ad_UserService;

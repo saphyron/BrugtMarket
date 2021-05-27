@@ -64,14 +64,13 @@ public class AdUserRepository implements IRepository<Ad_User> {
 
     public List<Ad_User> getByQId(Id id) {
         try {
-            return mapper.mapUsers(entityManager.createNamedQuery(Ad_UserPO.FIND_BY_QID, Ad_UserPO.class)
+            return mapper.mapUsers(entityManager.createNamedQuery(
+                    Ad_UserPO.FIND_BY_QID, Ad_UserPO.class)
                         .setParameter(Ad_UserPO.QID_PARAMETER, id)
                         .getResultList());
         } catch (NoResultException e) {
             return null;
         }
     }
-
-
 
 }

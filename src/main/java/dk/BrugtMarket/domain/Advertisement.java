@@ -55,7 +55,6 @@ public class Advertisement {
         return price;
     }
 
-
     public Creation_Date getCreation() {
         return creation;
     }

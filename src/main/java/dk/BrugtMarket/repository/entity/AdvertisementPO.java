@@ -18,7 +18,6 @@ import java.util.UUID;
 @NamedQueries({
         @NamedQuery(name = "AdvertisementPO.findAll", query = "Select q from AdvertisementPO q"),
         @NamedQuery(name = "AdvertisementPO.findByQID", query = "Select q from AdvertisementPO q where q.id=:QID")
-        //@NamedQuery(name = "AdvertisementPO.findByCategory", query = "select")
 })
 
 public class AdvertisementPO {
@@ -26,7 +25,7 @@ public class AdvertisementPO {
     public static final String FIND_ALL = "AdvertisementPO.findAll";
     public static final String QID_PARAMETER = "QID";
     public static final String FIND_BY_QID = "AdvertisementPO.findByQID";
-    public static final String GID_PARAMETER = "GID";
+
 
     @Id
     @GeneratedValue

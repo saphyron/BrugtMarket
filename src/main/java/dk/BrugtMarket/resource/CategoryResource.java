@@ -46,4 +46,19 @@ public class CategoryResource {
     public List<CategoryCountDTO> getCountCategories() {
         return service.getCountCategory().entrySet().stream().map(e->new CategoryCountDTO(e.getKey(),e.getValue())).collect(Collectors.toList());
     }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/advertisements")
+    @GET
+    public List<ReadCategoryDTO> getCategoryAdvertisement() {
+        return mapper.mapReadCategories(service.getCategories());
+    }
+
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}")
+    @GET
+    public List<ReadCategoryDTO> getById(@PathParam("id") String id) {
+        List<ReadCategoryDTO> selectedCategory = mapper.mapReadCategories(service.getCategoryById(id));
+        return selectedCategory;
+    }
 }

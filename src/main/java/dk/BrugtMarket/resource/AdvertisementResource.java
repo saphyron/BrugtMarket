@@ -58,17 +58,4 @@ public class AdvertisementResource {
         ));
     }
 
-    /*@Consumes(MediaType.APPLICATION_JSON)
-    @Path("/category/{categoryId}")
-    @POST
-    public void insertAdvertisementCategory(@PathParam("categoryId") String categoryId, CreateAdvertisementDTO advertisement) {
-        service.insertAdvertisementCategory(categoryId, new CreateAdvertisementDTO(
-                advertisement.getType(),
-                advertisement.getHeadline(),
-                advertisement.getText(),
-                advertisement.getPrice(),
-                advertisement.getCreation()
-        ));
-    }*/
-
 }

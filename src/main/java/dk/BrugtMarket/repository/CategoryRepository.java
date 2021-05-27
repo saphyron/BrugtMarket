@@ -48,6 +48,18 @@ public class CategoryRepository implements IRepository<Category> {
         entityManager.persist(newCategory);
     }
 
+    public List<Category> getByQId(String id) {
+        try {
+            return mapper.mapCategories(
+                    entityManager.createNamedQuery(
+                            CategoryPO.FIND_BY_QID, CategoryPO.class)
+                       .setParameter(CategoryPO.QID_PARAMETER, id)
+                        .getResultList());
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     @Override
     public Category getById(Id id) {
         return null;

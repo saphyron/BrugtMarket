@@ -27,6 +27,7 @@ public class CategoryService {
     public List<String> getCategoryNames() { return repository.getCategoryNames(); }
     public void insert(Category category) {repository.insert(category);}
     public Category getById(Id id) {return repository.getById(id);}
+    public List<Category> getCategoryById(String id) { return repository.getByQId(id);}
     public Map<String, Integer> getCountCategory() {
         return repository.getAll().stream().collect(Collectors.toMap(Category::getCategory, c-> c.getAdvertisement().size()));
     }

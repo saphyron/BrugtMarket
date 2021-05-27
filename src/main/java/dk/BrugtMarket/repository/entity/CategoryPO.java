@@ -12,11 +12,14 @@ import java.util.List;
 @Entity
 @Table(name = "Category")
 @NamedQueries({
-        @NamedQuery(name = "CategoryPO.distinctCategory", query = "select c from CategoryPO c")
+        @NamedQuery(name = "CategoryPO.distinctCategory", query = "select c from CategoryPO c"),
+        @NamedQuery(name = "CategoryPO.findByQID", query = "select c from CategoryPO c where c.category=:QID")
 })
 public class CategoryPO {
 
     public static final String FIND_CATEGORIES = "CategoryPO.distinctCategory";
+    public static final String QID_PARAMETER = "QID";
+    public static final String FIND_BY_QID = "CategoryPO.findByQID";
 
     @Id
     @Column(name = "category", columnDefinition = "VARCHAR(40)", nullable = false, unique = true)

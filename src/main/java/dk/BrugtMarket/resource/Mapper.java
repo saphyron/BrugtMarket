@@ -37,6 +37,7 @@ class Mapper {
 
     ReadAdvertisementDTO mapReadAdvertisement(Advertisement advertisement) {
         return new ReadAdvertisementDTO(
+                advertisement.getId().getId().toString(),
                 advertisement.getType().getType(),
                 advertisement.getHeadline().getHeadline(),
                 advertisement.getText().getText(),
