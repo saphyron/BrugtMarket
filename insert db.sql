@@ -14,6 +14,6 @@ select * from dbo.AD_USER
 select * from dbo.ADVERTISEMENT
 select * from dbo.City
 select * from dbo.Category
-select distinct category from dbo.ADVERTISEMENT
-select category, count(*) as amount from dbo.ADVERTISEMENT where category is not null group by category
+select  category from dbo.ADVERTISEMENT
+select category, count(*) as amount from dbo.Category where category is not null group by category
 select count(category) as category from dbo.ADVERTISEMENT
