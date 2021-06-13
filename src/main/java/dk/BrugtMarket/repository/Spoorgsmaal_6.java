@@ -49,4 +49,10 @@ public class Spoorgsmaal_6 {
             return service.getValues();
         }
     }
+
+    /*
+        <alternatives>
+        <class>dk.BrugtMarket.repository.Spoorgsmaal_6</class>
+    </alternatives>
+     */
 }

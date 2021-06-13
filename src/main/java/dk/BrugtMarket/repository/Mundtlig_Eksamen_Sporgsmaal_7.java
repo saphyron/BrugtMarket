@@ -18,7 +18,7 @@ import java.util.Set;
 public class Mundtlig_Eksamen_Sporgsmaal_7 {
 
     //Transient
-    Ad_User student = new Ad_User("værdier");
+    //Ad_User student = new Ad_User("værdier");
 
     //Persistent
     private final EntityManager entityManager;

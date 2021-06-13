@@ -52,4 +52,11 @@ public class Spoorgsmaal_8 {
             System.out.println("Kalder Metode");
         }
     }
+
+    /*
+        <interceptors>
+        <class>dk.howard.interceptors.cdi.InterceptorData</class>
+        <class>dk.howard.interceptors.cdi.AuditedInterceptor</class>
+    </interceptors>
+     */
 }
