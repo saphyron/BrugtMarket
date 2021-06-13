@@ -4,11 +4,4 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
        http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
        version="1.2" bean-discovery-mode="annotated">
-    <alternatives>
-        <class>dk.BrugtMarket.repository.Spoorgsmaal_6</class>
-    </alternatives>
-    <interceptors>
-        <class>dk.howard.interceptors.cdi.InterceptorData</class>
-        <class>dk.howard.interceptors.cdi.AuditedInterceptor</class>
-    </interceptors>
 </beans>
