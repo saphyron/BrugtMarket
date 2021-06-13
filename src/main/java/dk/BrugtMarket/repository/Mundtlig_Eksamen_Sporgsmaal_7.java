@@ -5,6 +5,7 @@ import dk.BrugtMarket.domain.City;
 import dk.BrugtMarket.domain.Id;
 import dk.BrugtMarket.repository.entity.Ad_UserPO;
 import dk.BrugtMarket.repository.entitymanager.DemoEntityManager;
+import org.hibernate.mapping.Set;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -12,11 +13,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import java.util.Set;
+
 
 @Dependent
 public class Mundtlig_Eksamen_Sporgsmaal_7 {
-
+    /*
     //Transient
     Ad_User student = new Ad_User("værdier");
 
@@ -59,6 +60,6 @@ public class Mundtlig_Eksamen_Sporgsmaal_7 {
     Set<Ad_User> brugerBy;
     @ManyToMany(mappedBy = "brugerBy")
     Set<City> byBruger;
-
+    */
 
 }
